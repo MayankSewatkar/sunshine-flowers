@@ -1,5 +1,7 @@
 # 🌻 Sunshine Flowers
 
+**Live site:** https://mayanksewatkar.github.io/sunshine-flowers/
+
 A simple, modern e-commerce storefront for a pastel-themed flower shop. Built with vanilla HTML, CSS, and JavaScript — no frameworks, no dependencies.
 
 ## Features
