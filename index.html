@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sunshine Flowers</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink:    #F9C4D2;
+      --yellow:  #FDE9A2;
+      --green:   #C8E6C9;
+      --purple:  #DDD0F0;
+      --peach:   #FDDCB5;
+      --bg:      #FDFAF7;
+      --text:    #3A3235;
+      --muted:   #9E8F96;
+      --border:  #EDE7E3;
+      --white:   #FFFFFF;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+
+    .logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo span { font-size: 1.4rem; }
+
+    nav { display: flex; gap: 2rem; }
+    nav a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--text); }
+
+    .cart-btn {
+      background: var(--pink);
+      border: none;
+      border-radius: 50px;
+      padding: 0.5rem 1.2rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: opacity 0.2s;
+    }
+    .cart-btn:hover { opacity: 0.8; }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, var(--yellow) 0%, var(--pink) 100%);
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: 0.75rem;
+      line-height: 1.15;
+    }
+    .hero p {
+      color: var(--text);
+      font-size: 1.05rem;
+      opacity: 0.75;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* ── Main layout ── */
+    main { max-width: 1200px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+
+    /* ── Filters ── */
+    .filters {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .filter-btn {
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      border-radius: 50px;
+      padding: 0.45rem 1.1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--muted);
+      transition: all 0.2s;
+    }
+    .filter-btn:hover { border-color: var(--text); color: var(--text); }
+    .filter-btn.active {
+      background: var(--text);
+      border-color: var(--text);
+      color: var(--white);
+    }
+
+    /* ── Grid ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.07);
+    }
+
+    .card-img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+
+    .card-body { padding: 1rem 1.2rem 1.2rem; }
+    .card-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+    .card-name {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 0.2rem;
+    }
+    .card-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+      line-height: 1.5;
+    }
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .price {
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+    .add-btn {
+      background: var(--text);
+      color: var(--white);
+      border: none;
+      border-radius: 50px;
+      padding: 0.45rem 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .add-btn:hover { opacity: 0.75; }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 5rem;
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><span>🌻</span> Sunshine Flowers</div>
+  <nav>
+    <a href="#">Shop</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </nav>
+  <button class="cart-btn">🛒 Cart (0)</button>
+</header>
+
+<div class="hero">
+  <h1>Fresh blooms,<br/>delivered with love 🌸</h1>
+  <p>Handpicked seasonal flowers for every occasion.</p>
+</div>
+
+<main>
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="bouquet">Bouquets</button>
+    <button class="filter-btn" data-filter="single">Single Stems</button>
+    <button class="filter-btn" data-filter="plant">Plants</button>
+    <button class="filter-btn" data-filter="seasonal">Seasonal</button>
+  </div>
+
+  <div class="grid" id="grid"></div>
+</main>
+
+<footer>
+  © 2025 Sunshine Flowers · Made with 🌷 and care
+</footer>
+
+<script>
+  const products = [
+    { id:1, name:"Pastel Dream Bouquet",    tag:"Bouquet",      category:"bouquet",  emoji:"💐", color:"#F9C4D2", desc:"A soft mix of roses, peonies & sweet pea.", price:"$42" },
+    { id:2, name:"Sunshine Sunflower",      tag:"Single Stem",  category:"single",   emoji:"🌻", color:"#FDE9A2", desc:"Bold and cheerful, perfect on its own.",   price:"$8"  },
+    { id:3, name:"Lavender Mist Bunch",     tag:"Bouquet",      category:"bouquet",  emoji:"💜", color:"#DDD0F0", desc:"Dried lavender with eucalyptus sprigs.",   price:"$28" },
+    { id:4, name:"Pink Peony",              tag:"Single Stem",  category:"single",   emoji:"🌸", color:"#F9C4D2", desc:"Lush, full bloom — a classic beauty.",     price:"$12" },
+    { id:5, name:"Mini Succulent Set",      tag:"Plant",        category:"plant",    emoji:"🪴", color:"#C8E6C9", desc:"Set of 3 tiny succulents in terracotta.",  price:"$22" },
+    { id:6, name:"Spring Garden Mix",       tag:"Seasonal",     category:"seasonal", emoji:"🌷", color:"#FDDCB5", desc:"Tulips, daffodils & ranunculus in season.", price:"$38" },
+    { id:7, name:"White Rose Elegance",     tag:"Bouquet",      category:"bouquet",  emoji:"🤍", color:"#EDE7E3", desc:"Classic white roses wrapped in kraft.",    price:"$35" },
+    { id:8, name:"Monstera Leaf",           tag:"Plant",        category:"plant",    emoji:"🍃", color:"#C8E6C9", desc:"Glossy tropical leaf, statement piece.",   price:"$18" },
+    { id:9, name:"Cherry Blossom Stem",     tag:"Seasonal",     category:"seasonal", emoji:"🌺", color:"#F9C4D2", desc:"Delicate spring branches in full bloom.",  price:"$15" },
+    { id:10, name:"Butter Yellow Tulips",   tag:"Single Stem",  category:"single",   emoji:"🌼", color:"#FDE9A2", desc:"Fresh-cut tulips in the softest yellow.",  price:"$9"  },
+    { id:11, name:"Wildflower Bouquet",     tag:"Bouquet",      category:"bouquet",  emoji:"🌾", color:"#FDDCB5", desc:"Loose, meadow-gathered wildflowers.",      price:"$30" },
+    { id:12, name:"Peace Lily Plant",       tag:"Plant",        category:"plant",    emoji:"🌿", color:"#C8E6C9", desc:"Elegant indoor plant, low maintenance.",   price:"$26" },
+  ];
+
+  let cartCount = 0;
+  const cartBtn = document.querySelector('.cart-btn');
+
+  function renderCards(filter) {
+    const grid = document.getElementById('grid');
+    grid.innerHTML = '';
+    const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+    filtered.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="card-img" style="background:${p.color}20">${p.emoji}</div>
+        <div class="card-body">
+          <div class="card-tag">${p.tag}</div>
+          <div class="card-name">${p.name}</div>
+          <div class="card-desc">${p.desc}</div>
+          <div class="card-footer">
+            <span class="price">${p.price}</span>
+            <button class="add-btn" onclick="addToCart()">Add to cart</button>
+          </div>
+        </div>`;
+      grid.appendChild(card);
+    });
+  }
+
+  function addToCart() {
+    cartCount++;
+    cartBtn.textContent = `🛒 Cart (${cartCount})`;
+  }
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderCards(btn.dataset.filter);
+    });
+  });
+
+  renderCards('all');
+</script>
+</body>
+</html>
